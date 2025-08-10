@@ -45,6 +45,22 @@ echo "# Configuration macOS" >> .env
 echo "NATIVEPHP_MACOS_BUNDLE_ID=com.distrobox.app" >> .env
 echo "NATIVEPHP_MACOS_CATEGORY=public.app-category.business" >> .env
 
+# Copie de l'icône macOS
+echo "🎨 Configuration de l'icône macOS..."
+if [ -f "resources/icons/macos/app.icns" ] || [ -f "resources/icons/macos/app.png" ]; then
+    mkdir -p storage/app/native/
+    if [ -f "resources/icons/macos/app.icns" ]; then
+        cp resources/icons/macos/app.icns storage/app/native/icon.icns
+        echo "✅ Icône ICNS macOS copiée"
+    else
+        cp resources/icons/macos/app.png storage/app/native/icon.png
+        echo "✅ Icône PNG macOS copiée"
+    fi
+else
+    echo "⚠️  Icône macOS non trouvée, génération automatique..."
+    bash scripts/generate-icons.sh
+fi
+
 # Build NativePHP pour macOS
 echo "🎯 Construction du package macOS..."
 php artisan native:build mac

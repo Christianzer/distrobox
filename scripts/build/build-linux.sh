@@ -53,6 +53,24 @@ echo "" >> .env
 echo "# Configuration Linux" >> .env
 echo "NATIVEPHP_LINUX_CATEGORY=Office" >> .env
 
+# Copie de l'icône Linux
+echo "🎨 Configuration de l'icône Linux..."
+if [ -f "resources/icons/linux/app.png" ]; then
+    mkdir -p storage/app/native/
+    cp resources/icons/linux/app.png storage/app/native/icon.png
+    echo "✅ Icône Linux copiée"
+    
+    # Copie aussi toutes les icônes hicolor pour l'intégration système
+    if [ -d "resources/icons/linux/hicolor" ]; then
+        mkdir -p storage/app/native/hicolor/
+        cp -r resources/icons/linux/hicolor/* storage/app/native/hicolor/
+        echo "✅ Icônes hicolor Linux copiées"
+    fi
+else
+    echo "⚠️  Icône Linux non trouvée, génération automatique..."
+    bash scripts/generate-icons.sh
+fi
+
 # Build NativePHP pour Linux
 echo "🎯 Construction du package Linux..."
 php artisan native:build linux

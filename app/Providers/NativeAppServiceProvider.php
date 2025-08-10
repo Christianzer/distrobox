@@ -25,7 +25,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             ->minHeight(768)
             ->rememberState()
             ->showDevTools(false)
-            ->icon('public/front/logoEmaster.png');
+            ->icon($this->getAppIcon());
 
         // Configuration du menu de l'application
         $this->setupApplicationMenu();
@@ -158,6 +158,36 @@ class NativeAppServiceProvider implements ProvidesPhpIni
         } catch (\Exception $e) {
             \Log::warning('Impossible d\'ouvrir le dossier: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Retourne le chemin de l'icône appropriée selon la plateforme
+     */
+    protected function getAppIcon(): string
+    {
+        $os = php_uname('s');
+        
+        if (strpos($os, 'Windows') !== false) {
+            // Windows : utiliser l'icône ICO
+            if (file_exists(resource_path('icons/windows/app.ico'))) {
+                return resource_path('icons/windows/app.ico');
+            }
+        } elseif (strpos($os, 'Darwin') !== false) {
+            // macOS : utiliser l'icône ICNS si disponible, sinon PNG haute résolution
+            if (file_exists(resource_path('icons/macos/app.icns'))) {
+                return resource_path('icons/macos/app.icns');
+            } elseif (file_exists(resource_path('icons/macos/app.png'))) {
+                return resource_path('icons/macos/app.png');
+            }
+        } else {
+            // Linux : utiliser l'icône PNG principale
+            if (file_exists(resource_path('icons/linux/app.png'))) {
+                return resource_path('icons/linux/app.png');
+            }
+        }
+        
+        // Fallback vers l'icône originale
+        return 'public/front/logoEmaster.png';
     }
 
     /**

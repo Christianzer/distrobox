@@ -26,6 +26,17 @@ cp .env .env.backup
 sed -i 's/APP_ENV=local/APP_ENV=production/' .env
 sed -i 's/APP_DEBUG=true/APP_DEBUG=false/' .env
 
+# Copie de l'icône Windows
+echo "🎨 Configuration de l'icône Windows..."
+if [ -f "resources/icons/windows/app.ico" ]; then
+    mkdir -p storage/app/native/
+    cp resources/icons/windows/app.ico storage/app/native/icon.ico
+    echo "✅ Icône Windows copiée"
+else
+    echo "⚠️  Icône Windows non trouvée, génération automatique..."
+    bash scripts/generate-icons.sh
+fi
+
 # Build NativePHP pour Windows
 echo "🎯 Construction du package Windows..."
 php artisan native:build win
