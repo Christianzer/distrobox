@@ -1,0 +1,73 @@
+{
+  "app": {
+    "name": "Distrobox",
+    "version": "1.0.0",
+    "description": "Application de gestion d'entreprise - Inventaire, ventes et finances",
+    "author": "Votre Nom",
+    "website": "https://www.example.com"
+  },
+  "build": {
+    "outputDir": "dist",
+    "cleanBefore": true,
+    "optimizeAssets": true
+  },
+  "windows": {
+    "icon": "public/front/logoEmaster.png",
+    "publisher": "Votre Entreprise",
+    "signTool": {
+      "enabled": false,
+      "certificatePath": "",
+      "password": ""
+    },
+    "installer": {
+      "createInstaller": false,
+      "installerType": "nsis"
+    }
+  },
+  "macos": {
+    "bundleId": "com.distrobox.app",
+    "category": "public.app-category.business",
+    "icon": "public/front/logoEmaster.png",
+    "signing": {
+      "enabled": false,
+      "identity": "Developer ID Application: Votre Nom",
+      "notarize": false
+    },
+    "dmg": {
+      "create": false,
+      "background": "",
+      "iconSize": 80
+    }
+  },
+  "linux": {
+    "category": "Office",
+    "icon": "public/front/logoEmaster.png",
+    "desktop": {
+      "categories": ["Office", "Finance"],
+      "mimeTypes": [],
+      "keywords": ["gestion", "entreprise", "inventaire", "ventes"]
+    },
+    "packages": {
+      "deb": {
+        "create": false,
+        "maintainer": "votre-email@example.com",
+        "section": "misc"
+      },
+      "rpm": {
+        "create": false,
+        "license": "MIT",
+        "group": "Applications/Office"
+      },
+      "appimage": {
+        "create": false
+      }
+    }
+  },
+  "distribution": {
+    "uploadToS3": false,
+    "s3Bucket": "",
+    "uploadToGitHub": false,
+    "githubRepo": "",
+    "createChecksums": true
+  }
+}

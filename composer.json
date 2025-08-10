@@ -2,24 +2,28 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.1",
         "ext-curl": "*",
         "ext-intl": "*",
         "ext-zip": "*",
-        "barryvdh/laravel-dompdf": "^1.0",
+        "barryvdh/laravel-dompdf": "^2.0",
         "dompdf/dompdf": "*",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.75",
-        "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
+        "fruitcake/laravel-cors": "dev-develop",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.2",
+        "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
         "mark-villudo/activity-logs": "dev-master",
         "mikehaertl/php-pdftk": "^0.13.0",
         "mpdf/mpdf": "^8.1",
+        "nativephp/electron": "*",
         "phpmailer/phpmailer": "^6.8",
         "phpoffice/phpword": "^1.0",
         "setasign/fpdf": "^1.8",
@@ -29,15 +33,16 @@
         "spatie/pdf-to-image": "^1.2",
         "spatie/pdf-to-text": "^1.52",
         "tecnickcom/tcpdf": "^6.6",
-        "yajra/laravel-datatables": "^1.5"
+        "yajra/laravel-datatables": "^10.0"
     },
     "require-dev": {
-        "facade/ignition": "^2.5",
+        "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.0.1",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^5.10",
-        "phpunit/phpunit": "^9.5.10"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.1"
     },
     "autoload": {
         "psr-4": {
@@ -68,6 +73,10 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "native:dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan native:serve --no-interaction\" \"npm run dev\" --names=app,vite"
         ]
     },
     "extra": {

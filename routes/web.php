@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\CaissesController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UpdateController;
 
 use App\Http\Controllers\EntrepotController;
 use App\Http\Controllers\ProduitsController;
@@ -113,6 +114,13 @@ Route::group(['middleware' => ['auth', 'activation']], function () {
     Route::get('page/message/edit/{id}',[RecouvrementController::class,'edit'])->name('message.edit');
     Route::put('page/message/update/{id}',[RecouvrementController::class,'update'])->name('message.update');
     Route::delete('page/message/delete/{id}',[RecouvrementController::class,'destroy'])->name('message.destroy');
+
+    // Routes pour les mises à jour
+    Route::get('page/updates',[UpdateController::class,'index'])->name('updates.index');
+    Route::post('page/updates/check',[UpdateController::class,'check'])->name('updates.check');
+    Route::post('page/updates/auto-toggle',[UpdateController::class,'toggleAutoUpdate'])->name('updates.auto-toggle');
+    Route::get('page/updates/version',[UpdateController::class,'version'])->name('updates.version');
+    Route::get('page/updates/history',[UpdateController::class,'history'])->name('updates.history');
 
 });
 Route::get('page/login', [UsersControllers::class, 'connexion'])->name('login');

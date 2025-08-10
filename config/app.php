@@ -168,6 +168,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Native\Laravel\NativeServiceProvider::class,
 
         /*
          * Application Service Providers...
