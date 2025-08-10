@@ -171,4 +171,12 @@ return [
      * Custom PHP binary path.
      */
     'binary_path' => env('NATIVEPHP_PHP_BINARY_PATH', null),
+
+    /**
+     * Database configuration for NativePHP.
+     * By default, NativePHP uses the default database connection.
+     */
+    'database' => [
+        'connection' => env('NATIVEPHP_DB_CONNECTION', env('DB_CONNECTION', 'mysql')),
+    ],
 ];
